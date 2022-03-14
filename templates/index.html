@@ -1,31 +1,32 @@
 <!DOCTYPE html>
+<html>
 <head>
     <title>ToDo App</title>
 </head>
 <body>
     <div>
         <h1>Things to do</h1>
-        <form action="/add" methods="post">
+        <form action="/add" method="POST">
             <label>To Do</label>
-            <input name="text" type="text" placeholder="Enter text">
+            <input name="title" type="text" placeholder="Enter text">
             <br>
             <button>Add</button>
         </form>
     </div>
-    <div>
-        <form action="/update" methods="post">
-            <label>To Do</label>
-            <input type="text" name="update">
-            <br>
-            <button>Update</button>
-        </form>
-    </div>
-    <div>
-        <form action="/delete">
-            <label>To Do</label>
-            <input type="text" name="delete">
-            <br>
-            <button>Delete</button>
-        </form>
-    </div>
+
+    {% for todo in todo_list %}
+    <p>{{ todo.id }} {{ todo.title }} </p>
+
+        {% if todo.complete == True %}
+        <span>complete</span>
+        {% else %}
+        <span>not complete</span>
+        {% endif %}
+
+        <a href="/update/{{todo.id}}">Update</a>
+        <a href="/delete/{{todo.id}}">Delete</a>
+
+    {% endfor %}
+    
 </body>
+</html>
